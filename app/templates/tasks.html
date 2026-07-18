@@ -1,0 +1,47 @@
+﻿{% extends "base.html" %}
+{% block title %}Tasks{% endblock %}
+{% block content %}
+
+<div class="card task-box">
+    <h2>Your Tasks</h2>
+
+    <form method="POST" action="{{ url_for('tasks.add_task') }}" class="task-form">
+        <input type="text" name="title" placeholder="New task" required>
+        <button type="submit" class="btn">Add</button>
+    </form>
+
+    {% if tasks %}
+        <form method="POST" action="{{ url_for('tasks.clear_tasks') }}" class="clear-form">
+            <button type="submit" class="btn btn-clear">Clear All Tasks</button>
+        </form>
+
+        <table class="task-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Task</th>
+                    <th>Status</th>
+                    <th>Change</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ task.title }}</td>
+                    <td><span class="status-badge status-{{ task.status | lower }}">{{ task.status }}</span></td>
+                    <td>
+                        <form method="POST" action="{{ url_for('tasks.toggle_status', task_id=task.id) }}">
+                            <button type="submit" class="btn btn-small">Next status</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="muted">No tasks yet - add your first one above.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,346 @@
+/* ============================================
+   To Do App — "Ledger" theme
+   A logbook feel: ruled lines, ink colors,
+   and stamp-style status badges.
+   ============================================ */
+
+:root {
+  --paper: #EDF1EA;
+  --paper-card: #FBFDF9;
+  --ink: #1E3A34;
+  --ink-soft: #4C6A63;
+  --rule: #C9D6C9;
+
+  --accent-pending: #C15B3F;   /* clay stamp */
+  --accent-working: #C08A1E;   /* gold stamp */
+  --accent-done: #2E7D5B;      /* green stamp */
+  --accent-danger: #B23A3A;
+
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
+
+  --radius: 6px;
+  --shadow: 0 1px 2px rgba(30, 58, 52, 0.06), 0 6px 20px rgba(30, 58, 52, 0.07);
+}
+
+@font-face {
+  font-family: "Fraunces";
+  src: local("Fraunces");
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 35px,
+      var(--rule) 35px,
+      var(--rule) 36px
+    ),
+    var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+a {
+  color: var(--ink);
+}
+
+/* ---------- Header ---------- */
+
+.site-header {
+  border-bottom: 2px solid var(--ink);
+  background: var(--paper);
+  padding: 20px 0;
+}
+
+.header-inner {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.brand {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.6rem;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+nav a {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  margin-left: 18px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s ease;
+}
+
+nav a:hover,
+nav a:focus-visible {
+  border-bottom-color: var(--ink);
+}
+
+/* ---------- Main / cards ---------- */
+
+main.container {
+  flex: 1;
+  padding-top: 36px;
+  padding-bottom: 36px;
+}
+
+.card {
+  background: var(--paper-card);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 28px 26px;
+}
+
+.card h2 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.muted {
+  color: var(--ink-soft);
+}
+
+/* ---------- Forms ---------- */
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+  margin-bottom: 6px;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  background: #fff;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--ink);
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  outline: 2px solid var(--ink);
+  outline-offset: 1px;
+}
+
+.btn {
+  display: inline-block;
+  background: var(--ink);
+  color: var(--paper-card);
+  border: none;
+  border-radius: 4px;
+  padding: 10px 18px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: transform 0.1s ease, opacity 0.1s ease;
+}
+
+.btn:hover {
+  opacity: 0.88;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn-clear {
+  background: var(--accent-danger);
+  margin: 14px 0;
+}
+
+.btn-small {
+  padding: 6px 10px;
+  font-size: 0.72rem;
+}
+
+/* ---------- Auth ---------- */
+
+.auth-card {
+  max-width: 380px;
+  margin: 0 auto;
+}
+
+.auth-switch {
+  margin-top: 18px;
+  margin-bottom: 0;
+  font-size: 0.9rem;
+}
+
+/* ---------- Task form row ---------- */
+
+.task-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.task-form input[type="text"] {
+  flex: 1;
+}
+
+.clear-form {
+  text-align: right;
+}
+
+/* ---------- Task table ---------- */
+
+.task-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+}
+
+.task-table th {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+  text-align: left;
+  border-bottom: 2px solid var(--ink);
+  padding: 8px 6px;
+}
+
+.task-table td {
+  padding: 12px 6px;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: middle;
+}
+
+.task-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Signature element: stamp-style status badges */
+.status-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1.5px dashed currentColor;
+  transform: rotate(-3deg);
+}
+
+.status-pending {
+  color: var(--accent-pending);
+}
+
+.status-working {
+  color: var(--accent-working);
+}
+
+.status-done {
+  color: var(--accent-done);
+  transform: rotate(2deg);
+}
+
+/* ---------- Flash messages ---------- */
+
+.flash {
+  padding: 10px 14px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  font-size: 0.92rem;
+  border-left: 4px solid transparent;
+}
+
+.flash.success {
+  background: #E4F1E8;
+  border-left-color: var(--accent-done);
+  color: #1E4A32;
+}
+
+.flash.danger {
+  background: #F6E4E1;
+  border-left-color: var(--accent-danger);
+  color: #6B2020;
+}
+
+.flash.info {
+  background: #EAF0F6;
+  border-left-color: #3A6EA5;
+  color: #1F3A54;
+}
+
+/* ---------- Footer ---------- */
+
+footer {
+  border-top: 1px solid var(--rule);
+  padding: 16px 0;
+  margin-top: auto;
+}
+
+footer p {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 480px) {
+  .task-form {
+    flex-direction: column;
+  }
+
+  .card {
+    padding: 20px 16px;
+  }
+
+  nav a {
+    margin-left: 12px;
+  }
+}
